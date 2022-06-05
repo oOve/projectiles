@@ -1,0 +1,57 @@
+{
+    "name": "projectiles",
+    "title": "Projectiles!",
+    "description": "Adds cannonballs and other projectiles.",
+    "version": "0.1.0",
+    "minimumCoreVersion": "9",
+    "compatibleCoreVersion": "9",
+    "author": "o_Ove",
+	"authors": [
+	  {
+      	"name": "o_Ove",
+      	"discord": "Ove#4315",
+      	"patreon": "https://www.patreon.com/drO_o"
+	  }
+    ],
+    "dependencies":[
+        {"name":"socketlib"}
+    ],
+    "socket": true,
+    "esmodules": ["./script/projectiles.mjs"],
+    "url": "https://github.com/oOve/projectiles",
+    "download": "https://github.com/oOve/projectiles/archive/0.1.0.zip",
+    "manifest": "https://github.com/oOve/projectiles/releases/latest/download/module.json",
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
+    ],
+    "license": "LICENSE",
+    "readme": "README.md",
+    "styles":[],
+    "packs": [],    
+    "library": false,
+
+    "media":[
+		{
+			"type":"cover",
+			"link":"https://gitlab.com/oOve/projectiles/raw/master/cover.jpg"
+		},
+		{
+			"type":"video",
+			"link":"https://gitlab.com/oOve/projectiles/webm",
+			"loop": true
+		},
+		{
+			"type":"video",
+			"link":"https://www.youtube.com"
+		},
+		{
+			"type":"screenshot",
+			"link":"https://gitlab.com/oOve/projectiles/screenshot1.jpg"
+		}
+	]
+
+}
