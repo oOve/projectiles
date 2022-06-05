@@ -12,7 +12,55 @@
 See [video](./media/video.mp4)
 
 # Usage
-TODO
+Install/enable this module, then add the following macro:
+```JS
+/*
+▓█████▄  ██▀███           ▒█████  
+▒██▀ ██▌▓██ ▒ ██▒        ▒██▒  ██▒
+░██   █▌▓██ ░▄█ ▒        ▒██░  ██▒
+░▓█▄   ▌▒██▀▀█▄          ▒██   ██░
+░▒████▓ ░██▓ ▒██▒ ██▓    ░ ████▓▒░
+ ▒▒▓  ▒ ░ ▒▓ ░▒▓░ ▒▓▒    ░ ▒░▒░▒░ 
+ ░ ▒  ▒   ░▒ ░ ▒░ ░▒       ░ ▒ ▒░ 
+ ░ ░  ░   ░░   ░  ░      ░ ░ ░ ▒  
+   ░       ░       ░         ░ ░  
+ ░                 ░              
+  Projectiles macro
+  See: https://github.com/oOve/projectiles for more info 
+ */
+
+let tex = 'modules/projectiles/media/td_basic_towers/PNG/Bullet_Cannon.png';
+
+let mouse = canvas.app.renderer.plugins.interaction.mouse;
+let local = mouse.getLocalPosition(canvas.app.stage);
+
+function onHit(data){
+  console.log("Hitdata:", data);
+  if (data.token){
+     data.token.actor.update({'data.attributes.hp.value':0});
+  }
+  let sequence = new Sequence()
+   sequence.effect()
+   .atLocation(data)
+   .file("jb2a.explosion.01.orange")
+   .sound("modules/pzzl-1/media/156031__iwiploppenisse__explosion.mp3")
+   ;
+  sequence.play();
+}
+
+
+let tok = canvas.tokens.controlled[0];
+let p = tok.center;
+let dir = {x: local.x-p.x, y: local.y-p.y};
+let s = Math.sqrt(dir.x**2 + dir.y**2);
+dir.x/=s;
+dir.y/=s;
+
+p.x += dir.x * tok.width  *0.6;
+p.y += dir.y * tok.height *0.6;
+let t = new Projectile( {x:p.x, y:p.y}, dir, 10.0, tex, onHit );
+```
+
 
 # Localization
 Current support for:
