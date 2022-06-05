@@ -4,6 +4,7 @@
 **Projectiles** is a framework for [Foundry VTT](https://foundryvtt.com/  "Foundry VTT") that allows projectiles to be added to the game.
 
 <p align="center">
+
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/oOve/projectiles?style=flat-square)
 [![Become a Patron](https://img.shields.io/badge/support-patreon-orange.svg?style=flat-square&logo=patreon)](https://www.patreon.com/drO_o)
  </p>
