@@ -79,4 +79,4 @@ All feedback and suggestions are welcome. Please contact me on Discord (Ove#4315
 Any issues, bugs, or feature requests are always welcome to be reported directly to the [Issue Tracker](https://github.com/oOve/Projectiles/issues  "Issue Tracker")
 
 # Licensing
-**Projectiles** is a module for [Foundry VTT](https://foundryvtt.com/  "Foundry VTT") by Dr.O  under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
+**Projectiles** is a module for [Foundry VTT](https://foundryvtt.com/  "Foundry VTT") by Dr.O  under a [MIT License](https://github.com/oOve/projectiles/blob/main/LICENSE)
