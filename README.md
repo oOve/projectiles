@@ -11,6 +11,8 @@
 
 See [video](./media/video.mp4)
 
+![ezgif-4-156c951c29](https://user-images.githubusercontent.com/8543541/172072899-2886c8d2-d94b-41cc-aaa8-19a46b543295.gif)
+
 # Usage
 Install/enable this module, then add the following macro:
 ```JS
