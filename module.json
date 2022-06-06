@@ -33,24 +33,14 @@
     "styles":[],
     "packs": [],    
     "library": false,
-
     "media":[
 		{
 			"type":"cover",
-			"link":"https://gitlab.com/oOve/projectiles/raw/master/cover.jpg"
-		},
-		{
+			"link":"https://github.com/oOve/projectiles/raw/main/media/banner.png"
+		},{
 			"type":"video",
-			"link":"https://gitlab.com/oOve/projectiles/webm",
+			"link":"https://github.com/oOve/projectiles/raw/main/media/video.mp4",
 			"loop": true
-		},
-		{
-			"type":"video",
-			"link":"https://www.youtube.com"
-		},
-		{
-			"type":"screenshot",
-			"link":"https://gitlab.com/oOve/projectiles/screenshot1.jpg"
 		}
 	]
 
