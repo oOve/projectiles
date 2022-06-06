@@ -63,14 +63,19 @@ p.y += dir.y * tok.height *0.6;
 let t = new Projectile( {x:p.x, y:p.y}, dir, 10.0, tex, onHit );
 ```
 
+# Media
+This module utilizes excellent art from several contributers.
+ * Explosion sound: by Iwiploppenisse, Ljudmann, Themfish and HerbertBoland @ [freesound](https://freesound.org/people/Iwiploppenisse/sounds/156031/)
+ * Bullet, rocket and cannontowers: [Nido @ opengameart.org](https://opengameart.org/content/tower-defence-basic-towers)
+ * Smoke: [Fupi @ opengameart.org](https://opengameart.org/content/smoke-vapor-particles)
+
+
 
 # Localization
 Current support for:
  * English -- https://github.com/oOve
  * 
- 
-
-If you want to translate this module, download [this file](lang/en.json) and translate it. After that open an issue sharing your translation. Also share the default name convention for your language. You can find that by either, finding a system or module that is already translated to your language and open its module.json. It should look something like this: ``` "languages": [ { "lang": "en", "name": "English", "path": "lang/en.json" } ```
+ If you want to translate this module, download [this file](lang/en.json) and translate it. After that open an issue sharing your translation. Also share the default name convention for your language. You can find that by either, finding a system or module that is already translated to your language and open its module.json. It should look something like this: ``` "languages": [ { "lang": "en", "name": "English", "path": "lang/en.json" } ```
 
 # Compatibility
 Tested on [Foundry VTT](https://foundryvtt.com/  "Foundry VTT") version `9`.
