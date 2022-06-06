@@ -68,6 +68,7 @@ This module utilizes excellent art from several contributers.
  * Explosion sound: by Iwiploppenisse, Ljudmann, Themfish and HerbertBoland @ [freesound](https://freesound.org/people/Iwiploppenisse/sounds/156031/)
  * Bullet, rocket and cannontowers: [Nido @ opengameart.org](https://opengameart.org/content/tower-defence-basic-towers)
  * Smoke: [Fupi @ opengameart.org](https://opengameart.org/content/smoke-vapor-particles)
+ * Grenade (launcher): [xFromarge1 @ freesound](https://freesound.org/people/xFromarge1/sounds/520045/)
 
 
 
