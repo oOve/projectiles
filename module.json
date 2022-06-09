@@ -14,7 +14,8 @@
 	  }
     ],
     "dependencies":[
-        {"name":"socketlib"}
+        {"name":"socketlib"},
+        {"name":"tagger"}
     ],
     "socket": true,
     "esmodules": ["./script/projectiles.mjs"],
