@@ -19,6 +19,7 @@
     ],
     "socket": true,
     "esmodules": ["./script/projectiles.mjs"],
+    "scripts" : [],
     "url": "https://github.com/oOve/projectiles",
     "download": "https://github.com/oOve/projectiles/archive/0.1.0.zip",
     "manifest": "https://github.com/oOve/projectiles/releases/latest/download/module.json",

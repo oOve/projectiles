@@ -39,9 +39,60 @@ function getHP(token){
   return token.actor.data.data.attributes.hp.value;
 }
 
+let desc = {
+	"alpha": {
+		"start": 1,
+		"end": 0
+	},
+	"scale": {
+		"start": 0.2,
+		"end": 0.15,
+		"minimumScaleMultiplier": 5
+	},
+	"color": {
+		"start": "#aaaaaa",
+		"end": "#010101"
+	},
+	"speed": {
+		"start": 200,
+		"end": 50,
+		"minimumSpeedMultiplier": 1
+	},
+	"acceleration": {
+		"x": 0,
+		"y": 500
+	},
+	"maxSpeed": 0,
+	"startRotation": {
+		"min": 0,
+		"max": 360
+	},
+	"noRotation": true,
+	"rotationSpeed": {
+		"min": 0,
+		"max": 0
+	},
+	"lifetime": {
+		"min": 0.2,
+		"max": 0.8
+	},
+	"blendMode": "normal",
+	"frequency": 0.001,
+	"emitterLifetime": -1,
+	"maxParticles": 430,
+	"pos": {
+		"x": 0,
+		"y": 0
+	},
+	"addAtBack": false,
+	"spawnType": "point"
+};
+
+
+
 
 export default class Projectile{
-  constructor(position, direction, velocity, image, onHit, deviation=0.0){
+  constructor(position, direction, velocity, image, onHit, deviation=0.0, trail=false){
     this.pos = position;
     this.dir = utils.vNorm(direction);
     this.vel = velocity;
@@ -54,29 +105,44 @@ export default class Projectile{
     this.sprite.x = position.x;
     this.sprite.y = position.y;
     this.sprite.rotation = Math.PI/2. + utils.vRad(direction);
-    canvas.background.addChild(this.sprite);
+    canvas.foreground.addChild(this.sprite);
+    
+    desc.pos = position;
+    if (trail){
+      this.emitter = new PIXI.particles.Emitter(canvas.foreground,'/modules/projectiles/media/particle.png', desc);
+      this.emitter.emit = true;
+    }else{this.emitter=null;}
 
     this.tick = new PIXI.Ticker();
     this.tick.add( this.refresh.bind(this) );
     this.tick.start();
   }
  
-  static create(position, direction, velocity, image, onHit, deviation=0.0, sync=true){
+  static create(position, direction, velocity, image, onHit, deviation=0.0, sync=true, trail=false){
     if (sync){
       p_socket.executeForOthers("create_projectile",{position:position, direction: direction, velocity:velocity, image:image, deviation:deviation});
     }
-    return new Projectile(position,direction, velocity, image, onHit, deviation);
+    return new Projectile(position,direction, velocity, image, onHit, deviation, trail);
   }
 
 
   destroy(){
     this.sprite.destroy();
     this.tick.destroy();
+    if(this.emitter)
+      this.emitter.destroy();
   }
 
-  refresh(){
+  refresh(ms){
+    
     let p1 = {x:this.sprite.x, y:this.sprite.y};
     let p2 = utils.vAdd(p1, utils.vMult(this.dir, this.vel));
+    
+    if (this.emitter){
+      this.emitter.update(ms*0.01);
+      this.emitter.updateSpawnPos(p1.x, p1.y);
+    }
+    
     let r = new Ray(p1, p2);
     let wcoll = canvas.walls.checkCollision(r);
     let tcoll = canvas.tokens.placeables.filter(t=>t.bounds.contains(p2.x, p2.y));
@@ -101,13 +167,81 @@ export default class Projectile{
   }
 }
 
+
+
 class Explosion{
   constructor(position){
-    
+    this.pos = position;
+    this.rep = 0;
+    this.len = 200;
+    desc.pos = position;
+    this.emitter = new PIXI.particles.Emitter(canvas.foreground,'/modules/projectiles/media/particle.png', desc);
+    this.emitter.emit = true;
+    this.tick = new PIXI.Ticker();
+    this.tick.add( this.refresh.bind(this) );
+    this.tick.start();
+  }
+  destroy(){
+    this.emitter.destroy();
+    this.tick.destroy();
+  }
+
+  refresh(ms){
+    this.rep+=ms;
+    this.emitter.update(ms * 0.001);
+    if (this.rep>this.len) this.destroy();    
   }
 
 }
 
+
+
+/*
+class Explosion{
+  constructor(position){
+    this.pos = position;
+    this.rep = 0;
+    this.count = 20;
+    this.len = 50;
+    this.p = [...Array(this.count).keys()].map(t=>Object.assign({},this.pos));
+    this.v = this.p.map(t=>{
+      let phi = Math.random()*2*Math.PI;
+      return {x:Math.cos(phi), y:Math.sin(phi)};
+    });
+    let image = '/modules/projectiles/media/20220609192700-6f49d388.png';
+    this.s = this.p.map(p=>{
+      let s = PIXI.Sprite.from(image);
+      s.anchor.set(0.5);
+      s.x=p.x;
+      s.y=p.y;
+      s.width = canvas.grid.size*2;
+      s.height= canvas.grid.size*2;
+      s.rotation = Math.random()*2*Math.PI;
+      canvas.foreground.addChild(s);
+      return s;
+    });
+    this.tick = new PIXI.Ticker();
+    this.tick.add( this.refresh.bind(this) );
+    this.tick.start();
+  }
+  destroy(){
+    this.s.map(s=>s.destroy());
+    this.tick.destroy();
+  }
+
+  refresh(ms){
+    this.rep+=ms;
+    this.s.forEach((s,i)=>{
+      s.x+=this.v[i].x * ms * 10.0;
+      s.y+=this.v[i].y * ms * 10.0;
+      s.alpha = 1.0 - this.rep / this.len;
+    })
+    if (this.rep>this.len) this.destroy();
+    
+  }
+
+}
+*/
 
 const argFact = (compareFn) => (array) => array.map((el, idx) => [el, idx]).reduce(compareFn)[1]
 const argMax = argFact((min, el) => (el[0] > min[0] ? el : min))
@@ -161,6 +295,7 @@ Hooks.on("canvasReady", (can)=>{
 
 Hooks.once('init', async function () {
   window.Projectile = Projectile;
+  window.Explosion  = Explosion;
 
 
   game.settings.register(MOD_NAME, "cannons", {
