@@ -69,6 +69,7 @@ This module utilizes excellent art from several contributers.
  * Bullet, rocket and cannontowers: [Nido @ opengameart.org](https://opengameart.org/content/tower-defence-basic-towers)
  * Smoke: [Fupi @ opengameart.org](https://opengameart.org/content/smoke-vapor-particles)
  * Grenade (launcher): [xFromarge1 @ freesound](https://freesound.org/people/xFromarge1/sounds/520045/)
+ * Laser zap: [nsstudios @ freesound](https://freesound.org/people/nsstudios/sounds/321101/)
 
 
 
