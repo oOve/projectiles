@@ -14,7 +14,7 @@ See [video](./media/video.mp4)
 ![ezgif-4-156c951c29](https://user-images.githubusercontent.com/8543541/172072899-2886c8d2-d94b-41cc-aaa8-19a46b543295.gif)
 
 # Usage
-Install/enable this module, then add the following macro:
+Install/enable this module, then add the following macro (has an additional dependency towards Sequencer):
 ```JS
 /*
 ▓█████▄  ██▀███           ▒█████  
@@ -28,6 +28,8 @@ Install/enable this module, then add the following macro:
    ░       ░       ░         ░ ░  
  ░                 ░              
   Projectiles macro
+  Select a token, point in the direction you wish to shoot
+  and run this macro. If it hits a token, set that tokens hp(5e) to zero. 
   See: https://github.com/oOve/projectiles for more info 
  */
 
