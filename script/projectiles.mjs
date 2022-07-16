@@ -35,7 +35,7 @@ function getHP(token){
     return token.actor.data.data.attributes.hp.value;
   }
 
-  // Default, valid for 5e and pf1 at least
+  // Default, valid for 5e and pf at least
   return token.actor.data.data.attributes.hp.value;
 }
 
@@ -255,7 +255,7 @@ function len2(v1,v2){return (v1.x-v2.x)**2 + (v1.y-v2.y)**2 }
 Hooks.on('updateToken', (token, change, options, user_id)=>{
   if (!game.user.isGM)return true;                          // only trigger on the gm's client
   if (!game.settings.get(MOD_NAME, "cannons")) return true; // If cannon-animation is off
-  if (!token.actor.hasPlayerOwner) return true;                   // This token has a player owner
+  if (!token.actor.hasPlayerOwner) return true;             // This token has a player owner
 
   let players = canvas.tokens.placeables.filter( t=>t.actor.hasPlayerOwner );
   let cannons = Tagger.getByTag("cannon");
@@ -278,24 +278,17 @@ Hooks.on('updateToken', (token, change, options, user_id)=>{
 
   }
 
-  "dfreds pocket money"
-  "innocentis loot"
-  "monks little details"
-
 });
 
 
 Hooks.on("canvasReady", (can)=>{
-  //console.error(can);
+    
 });
-
-
 
 
 
 Hooks.once('init', async function () {
   window.Projectile = Projectile;
-  window.Explosion  = Explosion;
 
 
   game.settings.register(MOD_NAME, "cannons", {
