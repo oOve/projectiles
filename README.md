@@ -47,7 +47,7 @@ function onHit(data){
    sequence.effect()
    .atLocation(data)
    .file("jb2a.explosion.01.orange")
-   .sound("modules/pzzl-1/media/156031__iwiploppenisse__explosion.mp3")
+   .sound("modules/projectiles/media/explosion.mp3")
    ;
   sequence.play();
 }
