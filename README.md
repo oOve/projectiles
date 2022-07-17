@@ -14,7 +14,10 @@ See [video](./media/video.mp4)
 ![ezgif-4-156c951c29](https://user-images.githubusercontent.com/8543541/172072899-2886c8d2-d94b-41cc-aaa8-19a46b543295.gif)
 
 # Usage
-Install/enable this module, then add the following macro (has additional dependencies towards Sequencer and JB2A):
+Install/enable this module, then add the following macros (has additional dependencies towards Sequencer and JB2A)
+
+## 1 Manual Use case
+This macro shoots from the selected token towards the direction of the mouse-cursor.
 ```JS
 /*
 ▓█████▄  ██▀███           ▒█████  
@@ -63,6 +66,80 @@ dir.y/=s;
 p.x += dir.x * tok.width  *0.6;
 p.y += dir.y * tok.height *0.6;
 let t = new Projectile( {x:p.x, y:p.y}, dir, 10.0, tex, onHit );
+```
+
+## 2 Monks Active Tiles
+This macro is made to work with Monks Active Tiles and Tagger.
+
+```JS
+/*
+▓█████▄  ██▀███           ▒█████  
+▒██▀ ██▌▓██ ▒ ██▒        ▒██▒  ██▒
+░██   █▌▓██ ░▄█ ▒        ▒██░  ██▒
+░▓█▄   ▌▒██▀▀█▄          ▒██   ██░
+░▒████▓ ░██▓ ▒██▒ ██▓    ░ ████▓▒░
+ ▒▒▓  ▒ ░ ▒▓ ░▒▓░ ▒▓▒    ░ ▒░▒░▒░ 
+ ░ ▒  ▒   ░▒ ░ ▒░ ░▒       ░ ▒ ▒░ 
+ ░ ░  ░   ░░   ░  ░      ░ ░ ░ ▒  
+   ░       ░       ░         ░ ░  
+ ░                 ░              
+  Active Projectiles Macro
+  Set Monks Active tiles to trigger this macro.
+  See: https://github.com/oOve/projectiles for more info 
+ */
+
+if(!game.modules.get('sequencer')?.active){  ui.notifications.error("This macro depends on that the module sequencer is installed and active"); }
+if(!game.modules.get('JB2A')===undefined){   ui.notifications.error("This macro depends on that the module JB2A is installed"); }
+if(!game.modules.get('projectiles')?.active){ui.notifications.error("This macro depends on the module projectiles installed and active"); }
+if(!game.modules.get('monks-active-tiles')?.active){ui.notifications.error("This macro depends on the module monks active tiles installed and active"); }
+
+if(arguments[0].args === undefined){ ui.notifications.error("This macro should not be run manually, but rather be triggered by Monks active tiles"); return;}
+if(arguments[0].args.length < 2){ui.notifications.error("This macro requires two arguments from within MATT, 1, the source(cannon) and 2. the tile to trigger if the projectile hits a token.");}
+
+
+let tex = 'modules/projectiles/media/td_basic_towers/PNG/Bullet_Cannon.png';
+let srcTag = arguments[0].args[0];
+let auTag  = arguments[0].args[1];
+
+
+function onHit(data){
+  console.log("Hitdata:", data);
+  if (data.token){
+     let auTile = Tagger.getByTag(auTag)[0];     
+     let p = data.token.center;
+     let opts = { tokens: [data.token.document], method: "projectile_macro", pt: p};    
+     console.log(opts);
+     try{
+        auTile.trigger(opts);
+     }catch (err){
+        console.error("Failed triggering Monks Tile from projectiles macro", err);
+     }
+  }
+  let sequence = new Sequence()
+   sequence.effect()
+   .atLocation(data)
+   .file("jb2a.explosion.01.orange")
+   .sound("modules/projectiles/media/explosion.mp3")
+   ;
+  sequence.play();
+}
+
+let src = Tagger.getByTag(srcTag)[0];
+let tok = arguments[0].token;
+let dst = tok.center;
+
+// Define the direction as dst - src
+let p = src.object.center;
+let dir = {x: dst.x-p.x, y: dst.y-p.y};
+let s = Math.sqrt(dir.x**2 + dir.y**2);
+dir.x/=s;
+dir.y/=s;
+
+
+// Offset the projectiles' starting point a bit.
+p.x += dir.x * src.object.width  *0.4;
+p.y += dir.y * src.object.height *0.4;
+let t = new Projectile( {x:p.x, y:p.y}, dir, 20.0, tex, onHit );
 ```
 
 # Media
