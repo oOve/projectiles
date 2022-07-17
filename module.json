@@ -1,8 +1,8 @@
 {
     "name": "projectiles",
     "title": "Projectiles!",
-    "description": "Adds cannonballs and other projectiles.",
-    "version": "0.1.0",
+    "description": "Add cannonballs, dynamic traps and projectiles.",
+    "version": "0.1.1",
     "minimumCoreVersion": "9",
     "compatibleCoreVersion": "9",
     "author": "o_Ove",
@@ -21,7 +21,7 @@
     "esmodules": ["./script/projectiles.mjs"],
     "scripts" : [],
     "url": "https://github.com/oOve/projectiles",
-    "download": "https://github.com/oOve/projectiles/archive/0.1.0.zip",
+    "download": "https://github.com/oOve/projectiles/archive/0.1.1.zip",
     "manifest": "https://github.com/oOve/projectiles/releases/latest/download/module.json",
     "languages": [
         {

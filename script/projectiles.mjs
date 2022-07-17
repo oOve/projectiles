@@ -136,7 +136,7 @@ export default class Projectile{
   refresh(ms){
     
     let p1 = {x:this.sprite.x, y:this.sprite.y};
-    let p2 = utils.vAdd(p1, utils.vMult(this.dir, this.vel));
+    let p2 = utils.vAdd(p1, utils.vMult(this.dir, this.vel*ms));
     
     if (this.emitter){
       this.emitter.update(ms*0.01);
