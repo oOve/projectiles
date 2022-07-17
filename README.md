@@ -49,6 +49,7 @@ function onHit(data){
   let sequence = new Sequence()
    sequence.effect()
    .atLocation(data)
+   .randomRotation()
    .file("jb2a.explosion.01.orange")
    .sound("modules/projectiles/media/explosion.mp3")
    ;
@@ -118,6 +119,7 @@ function onHit(data){
   let sequence = new Sequence()
    sequence.effect()
    .atLocation(data)
+   .randomRotation()
    .file("jb2a.explosion.01.orange")
    .sound("modules/projectiles/media/explosion.mp3")
    ;
