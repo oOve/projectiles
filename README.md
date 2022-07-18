@@ -66,7 +66,7 @@ dir.y/=s;
 
 p.x += dir.x * tok.width  *0.6;
 p.y += dir.y * tok.height *0.6;
-let t = new Projectile( {x:p.x, y:p.y}, dir, 10.0, tex, onHit );
+let t = Projectile.create( {x:p.x, y:p.y}, dir, 10.0, tex, onHit );
 ```
 
 ## 2 Monks Active Tiles
@@ -141,7 +141,7 @@ dir.y/=s;
 // Offset the projectiles' starting point a bit.
 p.x += dir.x * src.object.width  *0.4;
 p.y += dir.y * src.object.height *0.4;
-let t = new Projectile( {x:p.x, y:p.y}, dir, 20.0, tex, onHit );
+let t = Projectile.create( {x:p.x, y:p.y}, dir, 20.0, tex, onHit );
 ```
 
 # Media
