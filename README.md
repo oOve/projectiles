@@ -71,6 +71,10 @@ let t = Projectile.create( {x:p.x, y:p.y}, dir, 10.0, tex, onHit );
 
 ## 2 Monks Active Tiles
 This macro is made to work with Monks Active Tiles and Tagger.
+ 
+ 1. Create a tile that has the MATT trigger that will damage the token hit, e.g., the attack action. Tag this tile e.g., ouch.
+ 2. Create a tile that has the tags e.g., Cannon and C1.
+ 3. Create a tile that will trigger when a token steps on it (e.g., on enter). Have this tile have the action "run macro" and have it excecute the macro below. This action should also have two parameters: ouch C1 (if you used those suggestions from above). 
 
 ```JS
 /*
